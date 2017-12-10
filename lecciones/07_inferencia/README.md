@@ -6,25 +6,24 @@ Lección sobre técnicas de inferencia estadística que permitan derivar conclus
 
 ## Temas de la lección
 
-1. Estimación e intervalos de confidencia
-2. Test de Hipótesis
+1. Test de Hipótesis
 	+ La hipótesis NULL
 	+ La hipótesis alternativa
 	+ Hipótesis uni y bidireccional
-3. Significancia estadística y p-values
+2. Significancia estadística y p-values
 	+ P-value
 	+ Alpha
-	+ Errores the tipo 1 y 2
-4. T-tests
+	+ Errores de tipo 1 y 2
+3. T-tests
 	+ Grados de libertad
 	+ Tamaño del efecto
 	+ Error Estándar
 	+ Muestras independientes
-5. ANOVA
+4. ANOVA
 	+ Estadística F
 	+ ANOVA bidireccional
-6. Chi-Square Test
-7. Poder y tamaño de muestra
+5. Chi-Square Test
+
 
 ## Trabajo Práctico
 
@@ -36,15 +35,16 @@ Con este trabajo práctico buscaremos profundizar nuestro entendimiento sobre el
 2. Diferencia entre cantidad de becas adjudicadas a funcionarios públicos y trabajadores del sector privado;
 3. Diferencia entre cantidad de becas por tipo (maestría/doctorado);
 4. Diferencia entre cantidad de becas adjudicadas a gente residente en la capital y gente residente en el interior;
-5. Diferencia entre becarios que residen en su ciudad de origen y aquellos que encuentran viviendo en otra ciudad (identificar la principal ciudad donde se trasladan a vivir);
-6. Diferencia en monto adjudicado entre becarios que viven en Asunción y becarios que residen en el interior del país;
+5. Diferencia en monto adjudicado entre becarios que viven en Asunción y becarios que residen en el interior del país;
 
 ### Instrucciones
 
-* En R-studio y como parte del proyecto _Becal_ creado anteriormente crear un documento R Markdown y guardarlo dentro de la carpeta _proyecto_ con el nombre _inferencia-becal.R_;
-* Utilizando el lenguaje R realizar los análisis mencionados más arriba y reportarlos en utilizando el lenguaje Markdown;
-* Hacer push a github del reporte;
-* Enviar por mail el link al reporte creado.
+* En R-studio abrir el archivo _template_tare3.Rmd_ dentro de _proyecto_ y renombrarlo a _eda-becal.Rmd_;
+* Si no se encuentra ya instalado, instalar el paquete **R Markdown** (`r install.packages('rmarkdown')`) Mas información sobre [R Markdown](http://rmarkdown.rstudio.com/lesson-1.html)
+* Utilizando el lenguaje R realizar los análisis mencionados más arriba y reportarlos en utilizando el lenguaje R Markdown;
+* Desde R-studio generar un archivo HTML del reporte utilizando el botón _Knit_ que se encuentra entre las opciones del menú superior;
+* Hacer push a github de los archivos .Rmd y HTML;
+* Enviar por mail (o slack) el link los archivos .Rmd y HTML creado
 
 ## Referencias
 

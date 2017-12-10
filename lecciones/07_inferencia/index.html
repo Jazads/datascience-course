@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inferencia Estadística</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Inferencia Estadística">
+  <meta name="author" content="Jorge Saldivar">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="../libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="../libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="../libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="../libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="../libraries/frameworks/io2012/js/slides" 
+    src="../libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="../assets/img/logo-uca.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Inferencia Estadística</h1>
+    <h2>Curso de Data Science con Impacto Social</h2>
+    <p>Jorge Saldivar<br/>Universidad Católica &quot;Nuestra Señora de la Asunción&quot;</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Análisis Inferencial</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>El análisis infencial se utiliza para derivar, por medio de modelos estadísticos, conclusiones respecto a un conjunto de datos</p></li>
+<li><p>La idea es probar si los datos con los que contamos proveen suficientes evidencias para comprobar ciertas afirmaciones sobre un fenómeno a estudiar</p></li>
+<li><p>La fortaleza de la conclusión depende de como los datos fueron colectados</p></li>
+</ul>
+
+<p><img class=center src="../assets/img/analisis_inferencial.png" height=300 /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Test de Hipótesis</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>De las diferentes técnicas del análisis inferencial, nos enfocamos en el <strong>Test de Hipótesis</strong></p></li>
+<li><p>El <strong>Test de Hipótesis</strong> (o también conocido como <strong>Prueba Estadística</strong>) es un método del análisis inferencial que sirve para determinar, por ejemplo, si la diferencia entre dos grupos es estadísticamente significativa</p></li>
+<li><p>Ayuda a responder preguntas como, ¿es la diferencia encontrada fruto del azar?, o ¿que tan probable es que la diferencia esté reflejando alguna diferencia real entre los dos grupos?</p></li>
+</ul>
+
+<p><img class=center src="../assets/img/conclusion_analisis_inferencial.png" height=300 /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Proceso de Test de Hipótesis</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>El test de hipótesis es parecido a una demostración por contradicción en matemáticas</p></li>
+<li><p>Empezamos por asumir algo contrario a lo que queremos probar y la idea es demostrar en el proceso que nuestra asunción inicial es incorrecta. Analogía: <strong>juicios orales</strong></p></li>
+<li><p><strong>Ejemplo BECAL</strong>. Queremos probar que existe una diferencia entre la cantidad de becas otorgadas a gente del interior es diferente a la cantidad de becas otorgadas a gente de la capital. </p>
+
+<ul>
+<li><strong>Hipótesis NULA (H0)</strong>: no existe diferencia entre la cantidad de becas otorgadas a gente del interior con respecto a gente de la capital (asunción inical)</li>
+<li><strong>Hipótesis alternativa (HA)</strong>: si existe una diferencia entre la cantidad de becas otorgadas a gente del interior con respecto a gente de la capital (lo que nos interesa saber)</li>
+</ul></li>
+<li><p>Lo que hacemos entonces es usar métodos estadísticos para verificar si los datos a mano proveen evidencias suficientes que nos permitan rechazar H0 en favor de HA.</p></li>
+<li><p>Toda respuesta en estadística tiene siempre cierto grado de incertidumbre, por la variabilidad natural de los datos. Por lo tanto lo que realmente demostramos es que es <strong>&quot;muy probable&quot;</strong> que H0 es falso (o verdadero)</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Tipos de hipótesis alternativas</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Éxisten dos tipos de hipótesis alternativas</p></li>
+<li><p>Cuando en la hipótesis no hacemos referencia a el sentido de la diferencia, es decir solo nos interesa saber si existe o no una diferencia, decimos que estamos trabajando con una <strong>hipótesis bi-direccional</strong></p>
+
+<ul>
+<li><strong>Ejemplo.</strong> Existe una diferencia en la cantidad de becas que reciben los del interior y la capital</li>
+</ul></li>
+<li><p>Cuando en la hipótesis si hacemos referencia a que la diferencia es mayor o menos, decimos que estamos trabajando con una <strong>hipótesis uni-direccional</strong></p>
+
+<ul>
+<li><strong>Ejemplo.</strong> Los del interior reciben <strong>menos</strong> (o <strong>más</strong>) becas que los de la capital</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Prueba Estadística</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Luego de definir las hipótesis, el siguiente consiste en recolectar evidencias que nos permitan comprobar nuestras hipótesis</p></li>
+<li><p>En un test de hipótesis la manera de &quot;recolectar evidencias&quot; es aplicando a los datos <strong>pruebas estadísticas</strong></p></li>
+<li><p>La diferencia entre una prueba estadística y cualquier otro procedimiento estadístico es que la prueba estadística está formulada asumiendo que H0, la hipótesis nula, es verdadera</p></li>
+<li><p>Es decir, en un test de hipótesis definimos nuestra hipótesis y después trabjamos asumiendo que H0 es verdadera</p></li>
+</ul>
+
+<p><img class=center src="../assets/img/evidence.png" height=250 /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Test de Hipótesis en R</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class='..</p>
+
+ '></article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Significancia estadística y p-values</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>P-value</p></li>
+<li><p>Alpha</p></li>
+<li><p>Errores de tipo 1 y 2</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>T-tests</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Grados de libertad</p></li>
+<li><p>Tamaño del efecto</p></li>
+<li><p>Error estándar</p></li>
+<li><p>Muestras independientes</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>ANOVA</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Estadística F</p></li>
+<li><p>ANOVA bidireccional</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Chi-square Test</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class='..</p>
+
+ '></article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Análisis Inferencial'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Test de Hipótesis'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Proceso de Test de Hipótesis'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Tipos de hipótesis alternativas'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Prueba Estadística'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Test de Hipótesis en R'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Significancia estadística y p-values'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='T-tests'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='ANOVA'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Chi-square Test'>
+         10
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="../libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="../libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
