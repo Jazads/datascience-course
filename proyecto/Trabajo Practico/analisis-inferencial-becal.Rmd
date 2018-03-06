@@ -1,0 +1,149 @@
+---
+title: "Template Tarea: Inferencia Estadística"
+author: Jazmin Duarte Sckell
+date: "06/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+becal_completo = read.csv("becal_completo.csv")
+```
+
+Este trabajo busca explorar el dataframe de becarixs del programa de Becas de Postgrado en el Exterior Carlos Antonio López para conocer relaciones entre las características de su población de becarixs. Para ello se utilizan a continuación diferentes técnicas de pruebas de hipótesis para conocer la relación entre variables especificas seleccionadas. 
+
+
+## Diferencia en la cantidad de meses de estudio entre hombres y mujeres
+
+El supuesto que se quiere testear es que el sexo de la persona determina en cierta medida o está correlacionado con la cantidad de meses de estudio. 
+
+Para realizar la prueba de hipótesis se utilizan las variables sexo y tiempo de cobertura. Para medir el grado de relación se utilizó la técnica del chi cuadrado, con un intervalo de confianza del 95% y un nivel de significancia o alpha p = 0.05. 
+
+HO: No existe relación entre el sexo de lxs becarixs y la cantidad de meses de estudio.
+HA: Existe relación entre el sexo de lxs becarixs y la cantidad de meses de estudio.
+
+```{r diferencia_becas_sexo}
+chisq.test(table(becal_completo$sexo, becal_completo$tiempodecobertura))
+```
+
+Según la p-value obtenida (0.1058) es mayor a 0.05, por lo que no se puede descartar la H0. Es decir, no existen diferencias estadísticamente significativas en cuanto a una relación entre el sexo de lxs becarixs y la cantidad de meses de estudio.
+
+## Diferencia en edad entre becarios funcionarios públicos y becarios trabajadores del sector privado
+
+El supuesto a comprobar es si existe una relación entre el sector laboral del que provienen lxs becarixs y la edad que poseen.
+
+Para medir la relación entre la edad de lxs becarixs funcionarixs públicos y trabajadorxs del sector privado se utilizan las variables edad y la variable nueva sector laboral. Para crear la variable nueva se creó y utilizó la función sector laboral. Para ver la relación entre edad y tipo de becarix (funcionarix público o trabajadxr del sector privado) se utilizó el test ANOVA con un intervalo de confianza del 95% y un nivel de significancia o alpha p = 0.05. 
+
+H0: No existe relación entre la edad de los becarios y su pertenencia al sector público o al privado
+HA: Existe relación entre la edad de los becarios y su pertenencia al sector público o al privado
+
+```{r diferencia_becas_sector}
+#Crea variable nueva sector laboral
+
+sectorlaboral = function (funcionariopublicoinstitucion) { 
+  
+  if (funcionariopublicoinstitucion=="NO" | funcionariopublicoinstitucion=="NO ")
+    
+    return ("privado")
+  
+ else 
+   
+    return ("publico")
+}
+becal_completo$sectorlaboral = sapply(becal_completo$funcionariopublicoinstitucion, sectorlaboral) 
+
+#Código que calcula la relación entre sector laboral del becarix y edad 
+
+summary(aov(edad ~ sectorlaboral, data=becal_completo)) 
+```
+
+ANOVA dio como resultado un número muy pequeño (2.52e-16) no significativo para descartar la H0 o aceptar la HA, por lo tanto no se puede concluir que existe una relación entre la diferencia en edad y el sector laboral del que provienen lxs becarixs.
+
+### Diferencia en el ranking de las universidades de los que estudian maestría versus los que estudian doctorado
+
+El supuesto que se quiere probar en este ejercicio es que existe una relación entre el ranking de las universidades y el tipo de programa al que acceden lxs becarixs. 
+
+Para encontrar la relación entre el ranking de las universidades y el tipo de programa (maestría o doctorado) se utilizaron las variables categoria uni y tipo de estudio. La técnica utilizada para medir la relación entre las variables fue chi cuadrado con un intervalo de confianza del 95% y un nivel de significancia o alpha p = 0.05. 
+
+H0: No hay relación entre el ranking de universidades y el tipo de programa financiado.
+HA: Hay relación entre el ranking de universidades y el tipo de programa financiado.
+
+
+```{r diferencia_becas_tipo}
+chisq.test(table(becal_completo$categoriauni, becal_completo$tipoestudio))
+```
+
+Chi cuadrado dio como resultado p-value (4.27e-05) no significativo para descartar la H0 o aceptar la HA, por lo tanto no se puede concluir que existe una relación entre el ranking de universidades y el tipo de programa financiado.
+
+### Diferencia en la cantidad de meses de estudio entre los residentes de la capital, central, e interior
+
+El supuesto a comprobar es que existe una relación entre la cantidad de meses de estudio dependiendo de si lxs becarixs residen en la capital, central o el interior del país. 
+
+Para encontrar la relación entre la residencia de lxs becarixs y los meses de estudio se utilizaron las variables meses de duración de estudios y la nueva variable lugar de residencia (capital, central, interior). 
+Con la función lugar residencia se creó la nueva variable a partir de la variable inicial departamento de residencia. Para analizar la relación entre meses de duración de estudios y lugar de residencia se utilizó la técnica ANOVA con un intervalo de confianza del 95% y un nivel de significancia o alpha p = 0.05. 
+
+H0: No hay relación entre la cantidad de meses de estudio y el lugar de residencia del becarix.
+HA: Hay relación entre la cantidad de meses de estudio y el lugar de residencia del becarix.
+
+
+```{r diferencia_becas_ciudad_residencia}
+
+# Nueva variable lugar de residencia
+
+lugarresidencia = function (departamentoderesidencia) { 
+  
+  if (departamentoderesidencia=="Capital" | departamentoderesidencia=="Asunción")
+    
+    return ("capital")
+  
+  else 
+    
+  if (departamentoderesidencia=="Central")
+    
+    return ("central")
+  
+  else 
+    
+  if (departamentoderesidencia=="Alto Paraná" | departamentoderesidencia=="Amambay" | departamentoderesidencia=="AMAMBAY" | departamentoderesidencia=="Boquerón" | departamentoderesidencia=="Caaguazu"| departamentoderesidencia=="Caaguazú" | departamentoderesidencia=="Caazapá" | departamentoderesidencia=="Canindeyú"| departamentoderesidencia=="Concepción" | departamentoderesidencia=="Cordillera" | departamentoderesidencia=="Guairá"| departamentoderesidencia=="Itapuá" | departamentoderesidencia=="Misiones"| departamentoderesidencia=="Ñeembucú" | departamentoderesidencia=="Paraguari" | departamentoderesidencia=="Paraguarí" | departamentoderesidencia=="San Pedro")
+    
+    return ("interior")
+  
+  else
+  
+    return ("no aplica")
+}
+becal_completo$lugarresidencia = sapply(becal_completo$departamentoderesidencia, lugarresidencia)
+
+# Relación lugar de residencia y meses de estudio
+
+summary(aov(mesesdeduraciondeestudios ~ lugarresidencia, data=becal_completo)) 
+```
+
+ANOVA arrojó como resultado un valor de p muy pequeño (2.93e-06) como para para descartar la H0 o aceptar la HA, por lo tanto no se puede concluir que existe una relación entre la cantidad de meses de estudio y el lugar de residencia del becarix.
+
+
+## Relación entre sexo de los becarios y país de destino. Considerar solo los cinco países con más becarios
+
+El supuesto es que hay relacion entre el sexo del/a becarix y el país de destino. Para encontrar la relación entre el sexo de lxs becarixs y el país de destino se utilizaron las variables sexo y pais de destino respectivamente. 
+
+En primer lugar utilizando el código table se identificaron los cinco países con más becarixs. Luego con este criterio se creó un nuevo dataframe llamado destinomas a través del código subset donde se seleccionaron los registros correspondientes a los países con mayor cantidad de becarios (España, Argentina, Francia, Australia y Reino Unido), quedando conformado por un número de 580 registros u observaciones. 
+
+Posteriormente, utilizando el nuevo dataframe depurado, para el análisis de la relación entre el sexo y los países de destino con más becarixs se utilizó la técnica de análisis chi square con un intervalo de confianza del 95% y un nivel de significancia o alpha p = 0.05. 
+
+H0: No hay relación entre el sexo del/a becarix y su país de destino de estudio. 
+HA: Hay relación entre el sexo del/a becarix y su país de destino de estudio. 
+
+```{r diferencia_becas_lugar_residencia}
+
+#Dataframe segun países con más becarixs
+
+table(becal_completo$paisdedestino)
+
+destinomas = subset(becal_completo, becal_completo$paisdedestino=="España" | becal_completo$paisdedestino=="ESPAÑA" | becal_completo$paisdedestino=="Argentina" | becal_completo$paisdedestino=="Francia" | becal_completo$paisdedestino=="Australia" | becal_completo$paisdedestino=="Reino Unido")
+
+# Relación entre sexo y destino del becarix 
+chisq.test(table(destinomas$sexo,droplevels(destinomas$paisdedestino)))
+```
+
+El resultado obtenido en el p-value es de 0.01663, un valor menor a 0.05 por lo que se puede descartar la H0 y considerar la HA como válida. Existe una relación entre el sexo del/a becarix y su país de destino de estudio. 

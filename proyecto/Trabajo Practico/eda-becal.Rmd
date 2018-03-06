@@ -1,0 +1,261 @@
+---
+title: "Template Tarea: Inferencia Estadística"
+author: Jazmin Duarte Sckell
+date: "06/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r, echo=FALSE}
+
+# Abrir dataframe
+
+becal_completo = read.csv("becal_completo.csv")
+
+# Código para eliminar los registros cuyo tipo de estudio no sean maestría o doctorado
+
+table (becal_completo$tipoestudio) #Para identificar los tipos de programas no directamente clasificados como Maestria o Doctorado. Todos corresponden segun previa clasificacion a doctorado, maestria academica o maestria profesional. 
+```
+
+## Perfil demográfico de los becarixs
+
+Cantidad de registros luego del preprocesameniento previo (ver preprocesamiento-becal): **679 casos** con **37 variables** medidas por becarix correspondientes a los casos completos.
+
+__Técnicas utilizada en variables exploradas en este apartado__:
+
++Para sexo: la funcion table y gráfico de barras para conocer las frecuencias según ambos sexos en términos numéricos y en forma gráfica. 
+
++Para edad: la función summary y el histograma, el primero para conocer los diversos rangos en cuanto a los números minimo, máximo y promedio en término de edad, y el segundo para ver de forma gráfica la distribucion de frencuencias según diversos grupos etarios. 
+
++ Para sector laboral: función que clasifico en privado o público la variable "funcionariopublicoinstitucion". Table y gráfico de barras para conocer frecuencias y expresar gráficamente las frencuencias. 
+
+
+```{r perfil_demografico}
+# Código de análisis de la distribución de becarixs por edad, sexo, 
+
+summary(becal_completo$edad) #Conocer edad promedio, edad máxima y mínima de lxs becarixs
+
+hist(becal_completo$edad, main=paste("Distribución de becarios por edad (n=",nrow(becal_completo),")"), 
+     ylab="Frecuencia", xlab="Edad", col = "blue") #Distribución de becarixs por edad.
+
+table(becal_completo$sexo) #Cantidad de hombres y de mujeres
+
+barplot(prop.table(table(becal_completo$sexo)), col=c("yellow","pink"), ylim=c(0,0.7), 
+        main="Becarixs según sexo", ylab ="Frecuencias absolutas") #Frecuencias según sexo de forma gráfica
+
+# sector laboral (público/privado)
+
+table (becal_completo$funcionariopublicoinstitucion) #Ver la clasificacion existente
+
+sectorlaboral = function (funcionariopublicoinstitucion) { 
+  
+  if (funcionariopublicoinstitucion=="NO" | funcionariopublicoinstitucion=="NO ")
+    
+    return ("privado")
+  
+ else 
+   
+    return ("publico")
+}
+
+#Función que clasifica sector laboral en privado y publico
+
+becal_completo$sectorlaboral = sapply(becal_completo$funcionariopublicoinstitucion, sectorlaboral) #Nueva variable sector laboral
+
+table(becal_completo$sectorlaboral) #cantidad de becarixs provenientes del sector privado y público
+
+barplot(prop.table(table(becal_completo$sectorlaboral)), col=c("red","blue"), ylim=c(0,0.7), 
+        main="Sector laboral de becarixs", ylab ="Frecuencias absolutas") #Frecuencias según sector laboral
+```
+
+**Resultados**
+
+En cuanto a la distribución de lxs becarixs por edad se encuentran entre los 25 y 28 años, con menor cantidad de becarios menores de 25 u mayores de 35 años. El **promedio de edad** de las personas becadas es **29 años**.La edad mínima es 22 y la máxima 43 para esta muestra.
+
+En cuanto a la distribución según sexo, los datos muestran que existe una mayor cantidad de mujeres (412), representando el 61% de la población de becarixs frente a 267 hombres que representan el 39% de becarixs. 
+
+En cuanto al sector laboral del cual provienen los becarixs, se encuentra en la muestra un total de 435 becarixs provenientes del sector privado y 244 del sector público. El sector privado representa un 64% y el sector publico un 36%. Esto puede indicar que posteriormente el impacto de las becas en el sector publico sera menor que el esperado en el sector privado.
+
+
+## Tipo de estudios, aréas de la ciencia, y disciplinas
+
+Para analizar la distribución de becas de maestría y doctorado (tipo de estudio) en relación a los sectores y áreas de las ciencia priorizados se realizó una tabla comparativa donde se compararon ambas variables. 
+
+```{r tipo_estudio}
+# Código de análisis de la distribución de becas por tipo (maestría/doctorado) y disciplina
+table (becal_completo$subsectorpriorizado, becal_completo$tipoestudio)
+table (becal_completo$areadelaciencia, becal_completo$tipoestudio)
+
+```
+
+**Resultados**
+
+*En cuanto a las áreas de desarrollo priorizadas en relación al tipo de beca otorgada: 
+
+En cuanto a doctorados, las áreas priorizadas de acuerdo a la muestra utilizada según orden de importancia: en primer lugar el de Salud, seguida de Tecnologias ambientales, Educación y formación para el trabajo, y Cadenas agroindustriales.
+
+En cuanto a las maestrías académicas: en primer lugar tecnologías ambientales, seguida de Cadenas agroindustriales, Salud y Educación y formación para el trabajo.
+
+En cuanto a maestrías profesionales: la gran mayoría está relacionada a  Educación y formación para el trabajo.
+
+Se encuentran denominadores comunes y prevalencia de los mismos sectores en el otorgamiento de becas de distintos niveles. 
+
+*En cuanto al área de la ciencia priorizada en relación al tipo de beca otorgada: 
+
+Para el nivel de doctorado el área de la Ciencia más incentivada es Ingeniería y Tecnología, seguida de Ciencias Médicas y de la Salud, y posteriormente en el mismo nivel de valoración, Ciencias Exactas y Naturales y Ciencias Sociales. 
+
+Para el nivel de maestria académica, el área de conocimiento mayormente priorizada es el de Ciencias Exactas y Naturales, seguido de Ciencias Sociales y Ingeniería y Tecnología.
+
+Para el nivel de maestría profesional, el área del conocimiento más incentivada es el de Ciencias Sociales, seguida de Ingeniería y Tecnología. 
+
+Tomando el área de la ciencia como medida de análisis de enfoque de fortalecimiento de las ciencias desde el Estado se encuentran diversas tendencias dependiendo de los niveles de estudio. Sin embargo, se observan coincidencias en cuanto al fortalecimiento de Ciencias Sociales e Ingeniería y Tecnología.
+
+
+### Duración de estudios
+
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
+
+Para el análisis de los meses de estudio se aplicó summary y quantile a la variable meses de duración de estudio. 
+
+```{r duracion_estudio}
+# Código de análisis para calcular el promedio, la mediana, el mínimo, máximo, desviación estándar, y los cuantiles (0.25, 0.75) del tiempo de duración de los estudios
+summary(becal_completo$mesesdeduraciondeestudios)
+sd(becal_completo$mesesdeduraciondeestudios)
+quantile(becal_completo$mesesdeduraciondeestudios)
+quantile(becal_completo$mesesdeduraciondeestudios, probs=c(0.68))
+hist(becal_completo$mesesdeduraciondeestudios, main = "Meses de duración de estudio BECAL", 
+     freq = FALSE, ylim=c(0,0.1), xlab = "meses")
+```
+
+**Resultados**
+
+El máximo de meses de estudio es de 49 meses, que equivale a 4 años (para doctorados). El promedio de meses de estudio es de 18,73, es decir programas de maestría de 1 año y medio de duración. Como se observa en el histograma y en el segundo cuartil (50%) la mayoría de los programas están entre una duración de 10 a 15 meses. Por lo que se puede concluir que las maestrías financiadas en su mayoría son de estancias cortas o de un año. En segundo lugar las maestrías de duración de entre 20 a 25 meses (maestrías de dos años) y en tercer lugar los programas más largos de 50 meses o 4 años (doctorados).La desviación estándar es de 8.72, lo que nos explica que la variabilidad estándar de los datos es de 8 años en relacion al promedio (18.73). Teniendo en cuenta el cuartil del 68% de valor 23, podemos decir que la distribucion de los meses de estudio es normal, ya que no es mayor a una desviación estándar de la media de valor 15.
+
+
+### Completitud de estudios
+
+Para analizar el nivel de completitud de estudios se utilizó la variable condicion del becario, clasificada en becario retornado o becario, entendiendo al primero como beca completada y la segunda como beca en curso. La técnica utilizada fue table y pie chart que representan numérica y gráficamente el porcentaje de becas completadas y en curso.
+
+
+```{r completitud_estudio}
+table(becal_completo$condicion)
+pie(table(becal_completo$condicion),
+    main="Completitud de Estudios becarixs",
+    col=terrain.colors(5, alpha = .6),
+    radius = 0.9)
+```
+
+**Resultados**
+
+El gráfico demuestra que existen una mayoría de becas aún en curso, específicamente 632 becas, mientras que el número de becas completadas - becarios retornados - es de 47. Esto representan 93% de las becas siguen en curso y solo 7% se encuentran completas. 
+
+## Países, ciudades, y universidades de destino
+
+Para el análisis de la distribución de becas por país, ciudad y universidad de destino se tuvo en cuenta la siguientes variables: pais de destino, ciudad de destino en español y universidad de destino. Para todas se utilizó table. 
+
+```{r destino}
+table(becal_completo$paisdedestino)
+table(becal_completo$ciudaddedestinoenespanol)
+table(becal_completo$universidaddedestino)
+```
+
+**Resultados**
+
+El país con mayor cantidad de becarios es España con 380 becas, seguido de Argentina (61) y luego Francia (51) y Australia (48). Se demuestra que hay una preferencia por países hispanohablantes, aunque más enfocados en Europa que en ofertas latinoamericanas. Tal vez por los criterios de rankings establecidos por BECAL donde no están incluidas muchas universidades latinoamericanas, o tal vez también por el eurocentrismo característico tambien de los latinoamericanos. En correspondencia con estos datos las ciudades con más becarixs son Barcelona y Madrid, seguido de Buenos Aires. Así también las universidades de destino con mayor concentración de becarixs son la Universidad de Barcelona (84), Universidad Complutense de Madrid (78), Universidad Autónoma de Barcelona (62), Universidad de Buenos Aires (61), Universidad Politécnica de Cataluña (43)  y la Universidad Autónoma de Madrid (38).                   
+
+### Becarios por rango de ranking de universidad de destino
+
+Para analizar el ranking de las universidades de destino de los becarixs de BECAL se utilizó la variable categoriauni generada en el pre-procesamiento. El código utilizado es el de table (para el conteo) y barplot (para la representación gráfica).
+
+```{r distribucion_ranking}
+table(becal_completo$categoriauni)
+barplot(prop.table(table(becal_completo$categoriauni)), 
+        col = c("yellow", "blue", "orange", "red", "green"), ylim=c(0,0.9), 
+        main="Ranking universidades becarixs BECAL", ylab ="")
+
+```
+**Resultados**
+
+Las universidades de destino se encuentran en un 65% en ubicaciones de 200 para arriba (438 becas) y su ve un orden decreciente a medida que la universidad está mejor rankeada. No obstante, existen un número casi igua de  becarixs en universidades top 50 (95 becas) y top 150 (91 becas) con una ligera mayoría entre los que fueron a universidades top 50. No obstante es importante resaltar, aunque la minoría, que se otorgaron 19 becas para universidades rankeadas top 10. 
+
+## Becas
+
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
+Para analizar los montos asignados a las becas se utilizó la variable total general y los códigos summary y sd. 
+
+```{r montos_beca}
+summary(becal_completo$totalgeneral) #el promedio, la mediana, el mínimo, máximo
+table(becal_completo$totalgeneral)#el mínimo que no es 0
+which(grepl(180000, becal_completo$totalgeneral))
+which(grepl(8600, becal_completo$totalgeneral))
+sd(becal_completo$totalgeneral) #desviación estándar de los montos de beca
+```
+El monto máximo dato para becas es de 180.000 dólares mientras el monto mínimo es de 8600 dólares. El monto máximo es el de un doctorado en la Universidad de Minnesota (USA), mientras que en el caso del de monto mínimo, es un máster de un año en la Universidad Autónoma de Barcelona (España). Los costos varían de acuerdo al nivel de estudio, el país y la universidad. El promedio de dinero invertido en las becas es de 48.343 dólares.La desviación estándar es de 22911 dolares, lo cual significa que los montos asignados para becas tienen una distribución que le da una tendencia a variar por arriba o por abajo de ese número. 
+
+### Porcentaje de cobertura
+
+Para analizar los cuantiles de cobertura se tomo la variable total general y se aplicó el código quantile.
+
+```{r cobertura}
+
+quantile(becal_completo$totalgeneral) # Escribir aquí el código de análisis que calcular los cuantiles (25%, 50%, 75%, 100%) de cobertura
+```
+
+**Resultados**
+
+El 25% de los becarios reciben un máximo de 31.394 doláres de beca y el 50%, 39.932 dólares. El 75% recibe hasta 61.721 dólares, lo que indica que solo el último cuartil (Q4) recibe los montos más elevados de beca que tiene un máximo de 180.000 dólares.
+
+### Top-10 montos de cobertura
+
+Para poder identificar los 10 montos más grandes de cobertura se tomo de referencia la tabla de total general de la cual se extrajeron los 10 últimos montos más elevados. A través del código grepl se localizó a registro correspondia cada uno de los montos para proceder a su descripción en cuanto a tipo de programa, universidad y país al que correspondía. 
+
+```{r top10_montos}
+table(becal_completo$totalgeneral)
+which(grepl(98212,becal_completo$totalgeneral))
+which(grepl(100100,becal_completo$totalgeneral))
+which(grepl(108130,becal_completo$totalgeneral))
+which(grepl(108740,becal_completo$totalgeneral))
+which(grepl(109292,becal_completo$totalgeneral))
+which(grepl(146132,becal_completo$totalgeneral))
+which(grepl(146908,becal_completo$totalgeneral))
+which(grepl(157568,becal_completo$totalgeneral))
+which(grepl(169768,becal_completo$totalgeneral))
+which(grepl(180000,becal_completo$totalgeneral))
+# código de análisis que calcular el top-10 de montos de coberturas y el tipo de estudio a que corresponden
+```
+**Resultados**
+
+Top 10 (98.212$) corresponde a una maestría titulada Master of Development Practice de la Universidad de Queensland  (Australia) de 24 meses de duración.
+
+Top 9 (100.000$) corresponde a un doctorado titulado Enfoques proteomicos para el diagnostico de enfermedad de la Universidad de Estrasburgo (Francia) de duración de 48 meses.
+
+Top 8 (108.130$) corresponde a un doctorado titulado Doctorat de droit dans le domaine de la "Responsabilité Sociale et Environnementale (RSE) dans le transport aérien" (Derecho) de la Universidad Paris Saclay (Francia) de una duración de 48 meses. 
+
+Top 7 (108.740) corresponde a un programa titulado Doctorat génétique Institute for Integrative Biology of CellUMR 9198 UPsud / CNRS / CEA de la Universidad Paris Saclay (Francia) de 24 meses de duración.
+
+Top 6 (109292$) corresponde a dos becas otorgadas al mismo programa: Un doctorado titulado Doctorado en Ciencias de la Ingeniería, en el área de Ingeniería Industrial y de Transporte de la Universidad Pontificia Católica de Chile de 48 meses de duración.
+
+Top 5 (146132$) corresponde a una maestría titulada Maestría en agronomía y agroalimentación de la Universidad AgroParís Tech (Francia) de 15 meses de duración. 
+
+Top 4 (146908$) corresponde a un doctorado titulado Phd programme on Urban Development and Governance de la Erasmus University Rotterdam (Holanda) de 48 meses de duración.
+
+Top 3 (157568$) corresponde a un doctorado titulado Bioinformatics and medical applications of computer science de la Universidad Royal Holloway of London (Reino Unido) de 48 meses de duración.
+
+Top 2 (169768$) corresponde a un doctorado titulado Doctorado en Ciencias de la Computación de la Universidad Royal Holloway of London (Reino Unido) de 48 meses de duración.
+
+Top 1 (180000$) corresponde a un doctorado titulado PhD en Liderazgo Organizacional, Políticas y Desarrollo de la Universidad de Minnesota (USA) de 48 meses de duración.
+
+Por lo que se puede notar la mayoría de los montos más elevados otorgados para las becas corresponden a programas de doctorado de diversas partes del mundo, con excepcion de dos programas de maestría. 
+
+### Correlación entre montos de cobertura y ranking de universidades
+
+Para analizar la correlación entre los montos de cobertura y los rankings de las universidades de destino se tomaron las variables categoríauni (ranking de la universidad) y la total general (montos de cobetura). Los códigos utilizados para conocer la relación fue plot. 
+
+```{r correlacion}
+plot(becal_completo$categoriauni, becal_completo$totalgeneral, pch=20,col="red")
+```
+**Resultados**
+
+Interesantemente se puede observar que las universidades correspondientes al top 10 del ranking no están entre los montos de cobertura de becas más elevados. Los montos de cobertura más elevados corresponden a universidades pertenecientes al ranking top 50 y top 100, inclusive outliers en costo elevado. Esto podría deberse al tipo de programas financiados en esas categorías, programas de doctorado o de mayor duración en relación a los financiados dentro del ranking top 10. Si existe una correspondencia entre los montos menos elevados de financiamiento y el ranking de universidades correspondiente al top 200 y más de 200. Si es llamativo que alguno de los outliers de costo elevados correspondan con universidades clasificadas dentro del ranking más de 200. En estos casos los criterios de adjudicación de la beca - más allá del ranking al que pertenecía la universidad- habrán estado en relación a la relevancia del programa solicitado en cuanto al área de estudio y el plan de desarrollo país. 

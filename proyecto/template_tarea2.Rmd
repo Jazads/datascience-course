@@ -1,128 +1,135 @@
 ---
-title: "Template Tarea: AnÃ¡lisis Exploratorio de Datos"
-author: ""
-date: "12/3/2017"
+title: "Template Tarea: Inferencia Estadística"
+author: Jazmin Duarte Sckell
+date: "09/02/2018"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
 ```{r, echo=FALSE}
-# Escribir aqui el cÃ³digo para eliminar los registros cuyo tipo de estudio no sean
-# maestrÃ­a o doctorado
+
+# Escribir aqui el código para eliminar los registros cuyo tipo de estudio no sean
+# maestría o doctorado
+
+becal_completo = read.csv("becal_completo.csv")
+
+table (becal_completo$tipodebeca)
+
+becal_completo <- becal_completo[-which(is.na(becal_cobertura$ci)), ]
 ```
 
-## Perfil demogrÃ¡fico de los becarios
+## Perfil demográfico de los becarios
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+
 
 ```{r perfil_demografico}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis de la distribuciÃ³n de becarios por edad, sexo, 
-# sector laboral (pÃºblico/privado), ciudad y departamento de origen, 
+# Escribir aquí el código de análisis de la distribución de becarios por edad, sexo, 
+# sector laboral (público/privado), ciudad y departamento de origen, 
 # ciudad y departamento de residencia
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
-## Tipo de estudios, arÃ©as de la ciencia, y disciplinas
+## Tipo de estudios, aréas de la ciencia, y disciplinas
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r tipo_estudio}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis de la distribuciÃ³n de becas por 
-# tipo (maestrÃ­a/doctorado) y disciplina
+# Escribir aquí el código de análisis de la distribución de becas por 
+# tipo (maestría/doctorado) y disciplina
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
-### DuraciÃ³n de estudios
+### Duración de estudios
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r duracion_estudio}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis para calcular el promedio, la mediana, el mÃ­nimo, 
-# mÃ¡ximo, desviaciÃ³n estÃ¡ndar, y los cuantiles (0.25, 0.75) del tiempo de duraciÃ³n de 
+# Escribir aquí el código de análisis para calcular el promedio, la mediana, el mínimo, 
+# máximo, desviación estándar, y los cuantiles (0.25, 0.75) del tiempo de duración de 
 # los estudios
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
 ### Completitud de estudios
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r completitud_estudio}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis para calcular los cuantiles (25%, 50%, 75%, 100%) 
+# Escribir aquí el código de análisis para calcular los cuantiles (25%, 50%, 75%, 100%) 
 # de completitud  de los estudios
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
-## PaÃ­ses, ciudades, y universidades de destino
+## Países, ciudades, y universidades de destino
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r destino}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis de la distribuciÃ³n de becas por paÃ­s, 
+# Escribir aquí el código de análisis de la distribución de becas por país, 
 # ciudad, y universidad de destino;
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
 ### Becarios por rango de ranking de universidad de destino
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r distribucion_ranking}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis que permita investigar la distribuciÃ³n de 
+# Escribir aquí el código de análisis que permita investigar la distribución de 
 # becarios por rango de ranking de universidad de destino (top 10, top 50, 
 # top 100, top 150, top 200, mayor a 200)
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
 ## Becas
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r montos_beca}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis que calcular el promedio, la mediana
-# el mÃ­nimo, mÃ¡ximo, y desviaciÃ³n estÃ¡ndar de los montos de beca
+# Escribir aquí el código de análisis que calcular el promedio, la mediana
+# el mínimo, máximo, y desviación estándar de los montos de beca
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
 ### Porcentaje de cobertura
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r cobertura}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis que calcular los cuantiles 
+# Escribir aquí el código de análisis que calcular los cuantiles 
 # (25%, 50%, 75%, 100%) de cobertura
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
 ### Top-10 montos de cobertura
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r top10_montos}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis que calcular el top-10 de montos de 
+# Escribir aquí el código de análisis que calcular el top-10 de montos de 
 # coberturas y el tipo de estudio a que corresponden
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
-### CorrelaciÃ³n entre montos de cobertura y ranking de universidades
+### Correlación entre montos de cobertura y ranking de universidades
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.)
+Describir aquí el análisis (técnica, cantidad de registros, etc.)
 
 ```{r correlacion}
-# Escribir aquÃ­ el cÃ³digo de anÃ¡lisis que calcular la correlaciÃ³n 
+# Escribir aquí el código de análisis que calcular la correlación 
 # entre montos de cobertura y ranking de universidades
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados

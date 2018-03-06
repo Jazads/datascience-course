@@ -1,7 +1,7 @@
 ---
-title: "Template Tarea: Inferencia EstadÃ­stica"
-author: ""
-date: "12/7/2017"
+title: "Template Tarea: Inferencia Estadística"
+author: Jazmin Duarte Sckell
+date: "03/03/2018"
 output: html_document
 ---
 
@@ -9,57 +9,83 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ## Diferencia en la cantidad de meses de estudio entre hombres y mujeres
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.) Explicar cuales fueron las hipÃ³tesis H0 y HA consideradas, ademÃ¡s del nivel de significancia establecido
+En cuanto a la diferencia de meses de estudio entre hombres y mujeres se utilizó la variable sexo y tiempo de estudio. Para computar la relación entre la cantidad de becas asignadas a hombres y mujeres se utilizó la técnica del chi cuadrado, con un nivel de significancia del 95%, p = 0.05. 
+
+HO: No existe diferencia entre los meses de estudio de hombres y mujeres
+HA: Existe diferencia entre los meses de estudio de hombres y mujeres
 
 ```{r diferencia_becas_sexo}
-# Escribir aquÃ­ el cÃ³digo que compute la diferencia en la cantidad de becas 
-# asignadas a hombre y mujeres
+
+chisq.test(table(becal_completo$sexo,becal_completo$tiempodecobertura))
+
 ```
 
-Describir aquÃ­ los resultados
+Según la p-value obtenida (0.1058) es mayor a 0.05, por lo que no se puede descartar la H0. Es decir, no existen diferencias estadísticamente significativas en cuanto a los meses de estudio comparados según sexo. 
 
-## Diferencia en edad entre becarios funcionarios pÃºblicos y becarios trabajadores del sector privado
+## Diferencia en edad entre becarios funcionarios públicos y becarios trabajadores del sector privado
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.) Explicar cuales fueron las hipÃ³tesis H0 y HA consideradas, ademÃ¡s del nivel de significancia establecido
+Para medir la diferencia en edad entre becarixs funcionarixs públicos y trabajadorxs del sector privado se utilizan las variables edad y la variable nueva sector laboral. Para crear la variable nueva se utilizó la función sector laboral. Para ver la relación entre edad y tipo de becarix (funcionarix público o trabajadxr del sector privado) se utilizó chi cuadrado con un nivel de significacia del 95% p=0.05.
+
+H0:
+HA:
 
 ```{r diferencia_becas_sector}
-# Escribir aquÃ­ el cÃ³digo que calcule diferencia en cantidad de becas 
-# adjudicadas a funcionarios pÃºblicos y trabajadores del sector privado
+
+sectorlaboral = function (funcionariopublicoinstitucion) { 
+  
+  if (funcionariopublicoinstitucion=="NO" | funcionariopublicoinstitucion=="NO ")
+    
+    return ("privado")
+  
+ else 
+   
+    return ("publico")
+}
+becal_completo$sectorlaboral = sapply(becal_completo$funcionariopublicoinstitucion, sectorlaboral) #Crea variable nueva sector laboral
+
+
+
+
+
+# Escribir aquí el código que calcule diferencia en cantidad de becas 
+# adjudicadas a funcionarios públicos y trabajadores del sector privado
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
-### Diferencia en el ranking de las universidades de los que estudian maestrÃ­a versus los que estudian doctorado
+### Diferencia en el ranking de las universidades de los que estudian maestría versus los que estudian doctorado
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.) Explicar cuales fueron las hipÃ³tesis H0 y HA consideradas
+Describir aquí el análisis (técnica, cantidad de registros, etc.) Explicar cuales fueron las hipótesis H0 y HA consideradas
+
 
 ```{r diferencia_becas_tipo}
-# Escribir aquÃ­ el cÃ³digo que calcule la diferencia en cantidad de becas 
-# por tipo (maestrÃ­a/doctorado)
+# Escribir aquí el código que calcule la diferencia en cantidad de becas 
+# por tipo (maestría/doctorado)
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
 ### Diferencia en la cantidad de meses de estudio entre los residentes de la capital, central, e interior
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.) Explicar cuales fueron las hipÃ³tesis H0 y HA consideradas, ademÃ¡s del nivel de significancia establecido
+Describir aquí el análisis (técnica, cantidad de registros, etc.) Explicar cuales fueron las hipótesis H0 y HA consideradas, además del nivel de significancia establecido
 
 ```{r diferencia_becas_ciudad_residencia}
-# Escribir aquÃ­ el cÃ³digo que compute la diferencia entre cantidad de becas 
+# Escribir aquí el código que compute la diferencia entre cantidad de becas 
 # adjudicadas a gente residente en la capital y gente residente en el interior
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
 
-## RelaciÃ³n entre sexo de los becarios y paÃ­s de destino. Considerar solo los cinco paÃ­ses con mÃ¡s becarios
+## Relación entre sexo de los becarios y país de destino. Considerar solo los cinco países con más becarios
 
-Describir aquÃ­ el anÃ¡lisis (tÃ©cnica, cantidad de registros, etc.) Explicar cuales fueron las hipÃ³tesis H0 y HA consideradas, ademÃ¡s del nivel de significancia establecido
+Describir aquí el análisis (técnica, cantidad de registros, etc.) Explicar cuales fueron las hipótesis H0 y HA consideradas, además del nivel de significancia establecido
 
 ```{r diferencia_becas_lugar_residencia}
-# Escribir aquÃ­ el cÃ³digo que analize la diferencia en montos adjudicados entre 
-# becarios que viven en AsunciÃ³n y becarios que residen en el interior del paÃ­s
+# Escribir aquí el código que analize la diferencia en montos adjudicados entre 
+# becarios que viven en Asunción y becarios que residen en el interior del país
 ```
 
-Describir aquÃ­ los resultados
+Describir aquí los resultados
